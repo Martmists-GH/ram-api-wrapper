@@ -24,6 +24,9 @@ class Route(sync_.Route):
                             "Expected a response code in range 200-299, got {}"
                             .format(res.status_code))
 
+    async def __await__(self, url_params=None):
+        return await self.async_query(url_params=None)
+
 
 class Result(sync_.Result):
     async def async_download(self):
@@ -36,3 +39,6 @@ class Result(sync_.Result):
                     raise sync_.ResponseError(
                             "Expected a response code in range 200-299, got {}"
                             .format(res.status_code))
+
+    async def __await__(self):
+        return await self.async_download()

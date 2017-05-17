@@ -35,6 +35,9 @@ class Route:
                     "Expected a response code in range 200-299, got {}"
                     .format(res.status_code))
 
+    def __call__(self, url_params=None):
+        return self.sync_query(url_params)
+
 
 class Result:
     def __init__(self, path, id, type, nsfw, cdn_url):
@@ -53,3 +56,6 @@ class Result:
             raise ResponseError(
                     "Expected a response code in range 200-299, got {}"
                     .format(res.status_code))
+
+    def __call__(self):
+        return self.sync_download()
