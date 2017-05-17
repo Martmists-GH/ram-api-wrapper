@@ -3,7 +3,7 @@ import io
 try:
     import aiohttp
 except ImportError:
-    print("Requests module not installed, async functions not available!")
+    print("Aiohttp module not installed, async functions not available!")
 
 from . import sync_
 
