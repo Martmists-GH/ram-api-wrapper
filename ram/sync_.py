@@ -17,6 +17,7 @@ class Route:
         self.path = path
         self.method = method
         self.headers = headers
+        self.cdn_url = cdn_url
 
     def sync_query(self, url_params=None):
         res = getattr(requests, self.method.lower())(
@@ -27,7 +28,7 @@ class Route:
             # Some endpoints are not images
             if self.cdn_url is None:
                 return retval
-            return Result(**retval, base_url=self.base_url)
+            return Result(**retval, cdn_url=self.cdn_url)
 
         else:
             raise ResponseError(
@@ -36,15 +37,16 @@ class Route:
 
 
 class Result:
-    def __init__(self, path, img_id, img_type, nsfw, cdn_url):
+    def __init__(self, path, id, type, nsfw, cdn_url):
         self.path = path
-        self.img_id = img_id
-        self.img_type = img_type
+        self.cdn_path = path[2:]
+        self.img_id = id
+        self.img_type = type
         self.nsfw = nsfw
         self.cdn_url = cdn_url
 
     def sync_download(self):
-        res = requests.get(self.cdn_url+self.path)
+        res = requests.get(self.cdn_url+self.cdn_path)
         if 200 <= res.status_code < 300:
             return io.BytesIO(res.content)
         else:

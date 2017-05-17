@@ -16,7 +16,7 @@ imgtypes = [
 routes = {
     img: Route(base_url="https://rra.ram.moe/",
                path="i/r?type=" + img,
-               cdn_url="https://wia.ram.moe/")
+               cdn_url="https://wia.ram.moe")
     for img in imgtypes}
 
 __all__ = ["routes"] + list(routes.keys())

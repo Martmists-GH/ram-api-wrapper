@@ -17,7 +17,7 @@ class Route(sync_.Route):
                     retval = await res.json()
                     if self.cdn_url is None:
                         return retval
-                    return Result(**retval)
+                    return Result(**retval, cdn_url=self.cdn_url)
 
                 else:
                     raise sync_.ResponseError(
