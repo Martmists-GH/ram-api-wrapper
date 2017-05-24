@@ -25,5 +25,5 @@ setup(
     install_requires=["requests"],
     py_modules=["ram", "image"],
     keywords='ram api wrapper',
-    python_requires=">=3.5,2.7"
+    python_requires=">=3.0"
 )
