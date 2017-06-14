@@ -28,8 +28,7 @@ class Route(sync_.Route):
 class Result(sync_.Result):
     async def async_download(self):
         async with aiohttp.ClientSession() as ses:
-            async with ses.get(self.cdn_url+self.path,
-                               headers=self.headers) as res:
+            async with ses.get(self.cdn_url+self.path) as res:
                 if 200 <= res.status < 300:
                     return io.BytesIO(await res.read())
                 else:
