@@ -23,7 +23,7 @@ setup(
     ],
     # Add requests because it's available on both 2.7 and 3.5
     install_requires=["requests"],
-    py_modules=["ram", "image"],
+    packages=["ram"],
     keywords='ram api wrapper',
     python_requires=">=3.0"
 )
