@@ -24,14 +24,11 @@ class Route(sync_.Route):
                             "Expected a response code in range 200-299, got {}"
                             .format(res.status_code))
 
-    async def __await__(self, url_params=None):
-        return await self.async_query(url_params=None)
-
 
 class Result(sync_.Result):
     async def async_download(self):
         async with aiohttp.ClientSession() as ses:
-            async with ses.get(self.base_url+self.path,
+            async with ses.get(self.cdn_url+self.path,
                                headers=self.headers) as res:
                 if 200 <= res.status < 300:
                     return io.BytesIO(await res.read())
@@ -39,6 +36,3 @@ class Result(sync_.Result):
                     raise sync_.ResponseError(
                             "Expected a response code in range 200-299, got {}"
                             .format(res.status_code))
-
-    async def __await__(self):
-        return await self.async_download()
