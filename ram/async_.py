@@ -22,7 +22,7 @@ class Route(sync_.Route):
                 else:
                     raise sync_.ResponseError(
                             "Expected a response code in range 200-299, got {}"
-                            .format(res.status_code))
+                            .format(res.status))
 
 
 class Result(sync_.Result):
@@ -34,4 +34,4 @@ class Result(sync_.Result):
                 else:
                     raise sync_.ResponseError(
                             "Expected a response code in range 200-299, got {}"
-                            .format(res.status_code))
+                            .format(res.status))
